@@ -1,14 +1,15 @@
 {
-  "name": "plain-concepts-web-day-madrid.client-side",
+  "name": "swaggercodegeneration",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "npm run build:services && ng serve",
+    "build": "npm run build:services && ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build:services": "nswag swagger2tsclient /input:swagger.json /output:./src/app/services/services.ts /template:Angular"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
+    "nswag": "^11.12.9",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
   },

@@ -21,17 +21,9 @@
   </ItemGroup>
 
   <Target Name="ExecuteProductionNswagAndFrontendBuild" AfterTargets="AfterPublish">
-    <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(PublishDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:swagger.json" />
-    <Exec Command="$(NSwagExe_Core20) swagger2tsclient /input:swagger.json /output:../Heroes.ClientSide/src/app/services/services.ts /template:Angular" />
-    <Exec Command="ng build" WorkingDirectory="..\Heroes.ClientSide" />
-    <ItemGroup>
-      <ClientSideFiles Include="..\Heroes.ClientSide\dist\**\*.*" />
-    </ItemGroup>
-    <Copy SourceFiles="@(ClientSideFiles)" DestinationFiles="@(ClientSideFiles->'$(PublishDir)\wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(PublishDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:../Heroes.ClientSide/swagger.json" />
   </Target>
   <Target Name="CreateServicesFromControllers" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Debug'">
-    <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(OutDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:swagger.json /referencepaths:&quot;C:\\Program Files\\dotnet\\store\\x64\\netcoreapp2.0,%USERPROFILE%\\.nuget\\packages&quot;" />
-    <Exec Command="$(NSwagExe_Core20) swagger2tsclient /input:swagger.json /output:../Heroes.ClientSide/src/app/services/services.ts /template:Angular" />
-    <Copy SourceFiles="@(ClientSideFiles)" DestinationFiles="@(ClientSideFiles->'wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(OutDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:../Heroes.ClientSide/swagger.json /referencepaths:&quot;C:\\Program Files\\dotnet\\store\\x64\\netcoreapp2.0,%USERPROFILE%\\.nuget\\packages&quot;" />
   </Target>
 </Project>
