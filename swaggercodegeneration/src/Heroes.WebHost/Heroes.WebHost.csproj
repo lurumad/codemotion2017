@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="11.11.0" />
+    <PackageReference Include="NSwag.MSBuild" Version="11.11.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Heroes.Api\Heroes.Api.csproj" />
+  </ItemGroup>
+
+  <Target Name="ExecuteProductionNswagAndFrontendBuild" AfterTargets="AfterPublish">
+    <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(PublishDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:swagger.json" />
+    <Exec Command="$(NSwagExe_Core20) swagger2tsclient /input:swagger.json /output:../Heroes.ClientSide/src/app/services/services.ts /template:Angular" />
+    <Exec Command="ng build" WorkingDirectory="..\Heroes.ClientSide" />
+    <ItemGroup>
+      <ClientSideFiles Include="..\Heroes.ClientSide\dist\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ClientSideFiles)" DestinationFiles="@(ClientSideFiles->'$(PublishDir)\wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+  <Target Name="CreateServicesFromControllers" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Debug'">
+    <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(OutDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:swagger.json /referencepaths:&quot;C:\\Program Files\\dotnet\\store\\x64\\netcoreapp2.0,%USERPROFILE%\\.nuget\\packages&quot;" />
+    <Exec Command="$(NSwagExe_Core20) swagger2tsclient /input:swagger.json /output:../Heroes.ClientSide/src/app/services/services.ts /template:Angular" />
+    <Copy SourceFiles="@(ClientSideFiles)" DestinationFiles="@(ClientSideFiles->'wwwroot\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+</Project>

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AccountViewModel>
+
+@{
+    ViewData["Title"] = "Order";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<div class="row">
+    <h2>Accounts by type</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Account number</th>
+                <th>IFSC</th>
+                <th>Balance</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in Model)
+            {
+                <tr>
+                    <td>@account.Number</td>
+                    <td>@account.IFSC</td>
+                    <td>@account.Balance</td>
+                    <td>@account.Type</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

