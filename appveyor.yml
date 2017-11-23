@@ -14,7 +14,7 @@ install:
   # install modules
   - cd ./swaggercodegeneration/src/Heroes.ClientSide
   - npm install
-  - cd ../../..
+  - cd %APPVEYOR_BUILD_FOLDER%
 before_build:
   # Display the .NET Core version
   - cmd: dotnet --version
@@ -26,7 +26,7 @@ after_build:
   # For once the build has completed
   - cd ./swaggercodegeneration/src/Heroes.ClientSide
   - npm run build
-  - cmd: copy ./dist ../Heroes.WebHost/bin/Release/netcoreapp2.0/publish/wwwroot /y
+  - cmd: copy "./dist" "%APPVEYOR_BUILD_FOLDER%/Heroes.WebHost/bin/Release/netcoreapp2.0/publish/wwwroot" /y
 artifacts:
  - path: '\swaggercodegeneration\src\Heroes.WebHost\bin\Release\netcoreapp2.0\publish'
    name: WebSite
