@@ -127,7 +127,7 @@ export class HeroesClient {
 
 export class Hero implements IHero {
     id: number;
-    name?: string;
+    title?: string;
 
     constructor(data?: IHero) {
         if (data) {
@@ -141,7 +141,7 @@ export class Hero implements IHero {
     init(data?: any) {
         if (data) {
             this.id = data["id"];
-            this.name = data["name"];
+            this.title = data["title"];
         }
     }
 
@@ -154,14 +154,14 @@ export class Hero implements IHero {
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
-        data["name"] = this.name;
+        data["title"] = this.title;
         return data; 
     }
 }
 
 export interface IHero {
     id: number;
-    name?: string;
+    title?: string;
 }
 
 export class SwaggerException extends Error {

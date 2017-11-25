@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
 
   onSelect(hero: Hero): void{
     this.selectedHero = hero;
-    let name = hero.name;
+    let name = hero.title.name;
   }
 
   ngOnInit() : void{

@@ -19,6 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Heroes.Api\Heroes.Api.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0" />
+  </ItemGroup>
 
   <Target Name="ExecuteProductionNswagAndFrontendBuild" AfterTargets="AfterPublish">
     <Exec Command="$(NSwagExe_Core20) webapi2swagger /assembly:$(PublishDir)Heroes.Api.dll /DefaultPropertyNameHandling:CamelCase /output:../Heroes.ClientSide/swagger.json" />
