@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:services": "nswag swagger2tsclient /input:swagger.json /output:./src/app/services/services.ts /template:Angular /ClientBaseClass:BaseService /ExtensionCode:./src/app/baseService.ts /UseTransformOptionsMethod:true"
+    "build:services": "nswag swagger2tsclient /input:swagger.json /output:./src/app/services/services.ts /template:Angular /ClientBaseClass:BaseService /ExtensionCode:./src/app/baseService.ts /UseTransformOptionsMethod:true",
+    "build:services-custom": "node ./generate-custom-services/index.js"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.2",
+    "swagger-js-codegen": "^1.12.0",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.3.3"
